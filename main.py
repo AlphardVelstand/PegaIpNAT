@@ -1,7 +1,7 @@
 import streamlit as st
 import streamlit.components.v1 as components
 
-# HTML e JavaScript para capturar o IP e adicionar o botão de atualizar
+# HTML e JavaScript para capturar o IP
 html_code = """
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -111,9 +111,9 @@ html_code = """
 </html>
 """
 
-# Usar o componente HTML do Streamlit para exibir o HTML e o JS
-components.html(html_code, height=1600)
+# Exibir o código HTML no Streamlit
+components.html(html_code, height=600)
 
-# Se você preferir um botão que interaja diretamente com o backend Python do Streamlit, use:
-# if st.button('Atualizar IP'):
-#     st.write('Atualizando IP...')
+# Botão do Streamlit para atualizar o IP
+if st.button('Atualizar IP via Streamlit'):
+    st.write("Atualizando o IP via Streamlit...")
