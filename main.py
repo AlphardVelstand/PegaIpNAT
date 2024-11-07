@@ -53,16 +53,19 @@ html_code = """
                 document.getElementById('ip').innerText = `Seu IP NAT é: ${ipAtual}`;
             } catch (error) {
                 console.error('Erro ao obter IP:', error);
+                document.getElementById('ip').innerText = 'Não foi possível obter o IP.';
             }
         }
 
         function atualizarIP() {
             obterIP();  // Chama a função para atualizar o IP
         }
+
+        window.onload = obterIP;  // Carrega automaticamente o IP ao abrir a página
     </script>
 </head>
 
-<body onload="obterIP()">
+<body>
     <h1>Bem-vindo ao nosso site!</h1>
     <p id="ip">Carregando seu IP...</p>
 
@@ -113,7 +116,3 @@ html_code = """
 
 # Exibir o código HTML no Streamlit
 components.html(html_code, height=600)
-
-# Botão do Streamlit para atualizar o IP
-if st.button('Atualizar IP via Streamlit'):
-    st.write("Atualizando o IP via Streamlit...")
