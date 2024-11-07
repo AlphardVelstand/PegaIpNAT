@@ -1,11 +1,7 @@
-import streamlit as st
-import streamlit.components.v1 as components
-
-# HTML e JavaScript para capturar o IP
-html_code = """
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Captura de IP</title>
     <style>
@@ -16,18 +12,13 @@ html_code = """
             text-align: center;
             padding: 40px;
         }
-        .adsense {
-            width: 100%;
-            text-align: center;
-            margin: 20px 0;
-            border: 2px solid red;
-            padding: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+        
         #ip {
             font-size: 20px;
             margin-top: 20px;
+            font-weight: bold;
         }
+
         #btn-atualizar {
             margin-top: 20px;
             padding: 10px 20px;
@@ -38,42 +29,33 @@ html_code = """
             font-size: 16px;
             border-radius: 5px;
         }
+
         #btn-atualizar:hover {
             background-color: #0056b3;
         }
+
+        .adsense {
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid red;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
-    <script>
-        let ipAtual = "";
-
-        async function obterIP() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                ipAtual = data.ip;
-                document.getElementById('ip').innerText = `Seu IP NAT é: ${ipAtual}`;
-            } catch (error) {
-                console.error('Erro ao obter IP:', error);
-                document.getElementById('ip').innerText = 'Não foi possível obter o IP.';
-            }
-        }
-
-        function atualizarIP() {
-            obterIP();  // Chama a função para atualizar o IP
-        }
-
-        window.onload = obterIP;  // Carrega automaticamente o IP ao abrir a página
-    </script>
 </head>
-
 <body>
+
     <h1>Bem-vindo ao nosso site!</h1>
+
+    <!-- Área onde o IP será exibido -->
     <p id="ip">Carregando seu IP...</p>
 
-    <!-- Botão de atualização do IP -->
+    <!-- Botão para atualizar o IP -->
     <button id="btn-atualizar" onclick="atualizarIP()">Atualizar IP</button>
 
     <div class="adsense">
-        <!-- Insira o código do seu AdSense aqui -->
+        <!-- Exemplo de código de AdSense -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <ins class="adsbygoogle"
              style="display:block"
@@ -86,7 +68,7 @@ html_code = """
     </div>
 
     <div class="adsense">
-        <!-- Insira o código do seu AdSense aqui novamente para a lateral ou outro lugar -->
+        <!-- Exemplo de código de AdSense para outra posição -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-xxxxxxxxxx"
@@ -99,7 +81,7 @@ html_code = """
 
     <footer class="adsense">
         <div>
-            <!-- Insira o código do AdSense para o rodapé -->
+            <!-- Exemplo de código de AdSense para o rodapé -->
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-xxxxxxxxxx"
@@ -110,9 +92,28 @@ html_code = """
             </script>
         </div>
     </footer>
+
+    <script>
+        // Função para obter o IP
+        async function obterIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                document.getElementById('ip').innerText = `Seu IP NAT é: ${data.ip}`;
+            } catch (error) {
+                console.error('Erro ao obter IP:', error);
+                document.getElementById('ip').innerText = 'Não foi possível obter o IP.';
+            }
+        }
+
+        // Função para atualizar o IP
+        function atualizarIP() {
+            obterIP(); // Chama a função para atualizar o IP
+        }
+
+        // Carregar o IP assim que a página for carregada
+        window.onload = obterIP;
+    </script>
+
 </body>
 </html>
-"""
-
-# Exibir o código HTML no Streamlit
-components.html(html_code, height=600)
